@@ -1,0 +1,93 @@
+<div class="body-container">
+    <div class="ping-body-container">
+        <div class="header-block">
+            <div class="header">Service Provider Sample</div>
+            <div class="sub-header">Configuration</div>
+        </div>
+        <div class="config-container">
+            @if (@ViewData["errorMessage"] != null)
+            { 
+                <div class="configuration-failure">@ViewData["errorMessage"]</div>
+            }
+            <form name="sp-adapter-configuration"
+                  method="post"
+                  enctype="application/x-www-form-urlencoded"
+                  action="@ViewData["configureUrl"]">
+                <div class="grid-container">
+                    <div class="ping-input grid-a">
+                        <label class="ping-input-label">BASE PF URL</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["basePfUrlName"]"
+                                   id="base_pf_url_input"
+                                   value="@ViewData["basePfUrl"]">
+                        </div>
+                    </div>
+                    <div class="ping-input grid-b">
+                        <label class="ping-input-label">APPLICATION USERNAME</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["adapterUsernameName"]"
+                                   id="application_username_input"
+                                   value="@ViewData["adapterUsername"]">
+                        </div>
+                    </div>
+                    <div class="ping-input grid-c">
+                        <label class="ping-input-label">APPLICATION PASSPHRASE</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["adapterPassphraseName"]"
+                                   id="application_passphrase_input"
+                                   value="@ViewData["adapterPassphrase"]">
+                        </div>
+                    </div>
+                    <div class="ping-input grid-d">
+                        <label class="ping-input-label">SP ADAPTER ID</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["adapterIdName"]"
+                                   id="adapter_id_input"
+                                   value="@ViewData["adapterId"]">
+                        </div>
+                    </div>
+                    <div class="ping-input grid-f">
+                        <label class="ping-input-label">TARGET URL</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["targetUrlName"]"
+                                   id="target_url_input"
+                                   value="@ViewData["targetUrl"]">
+                        </div>
+                    </div>
+                    <div class="ping-input grid-g">
+                        <label class="ping-input-label">PARTNER ENTITY ID</label>
+                        <div class="ping-input-container">
+                            <input type="text"
+                                   name="@ViewData["partnerIdName"]"
+                                   id="partner_entity_id_input"
+                                   value="@ViewData["partnerId"]">
+                        </div>
+                    </div>
+                </div>
+                <div class="configuration-buttons-container">
+                    <div class="ping-input-container">
+                        <input class="table-button" id="save_button" name="submit" type="submit" value="Save"/>
+                    </div>
+                    <div class="ping-input-container">
+                        <div class="cancel">
+                            <a onclick="javascript:back();">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="ping-footer-container">
+        <div class="ping-footer">
+            <div class="ping-credits"></div>
+            <div class="ping-copyright">
+                Copyright © 2003-2020. Ping Identity Corporation. All rights reserved.
+            </div>
+        </div>
+    </div>
+</div>

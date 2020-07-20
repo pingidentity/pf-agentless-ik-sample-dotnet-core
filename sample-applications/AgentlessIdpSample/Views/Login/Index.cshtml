@@ -1,0 +1,89 @@
+<div class="body-container">
+    <div class="ping-body-container">
+        <div class="header-block">
+            <div class="header">Identity Provider Sample</div>
+            <div class="sub-header">Drop Off User-Session Attributes</div>
+            <div class="left-header">
+                <a href="@ViewData["configureUrl"]">Configuration</a>
+            </div>
+        </div>
+        @if ((bool) @ViewData["showData"] == true)
+        { 
+        <div class="row dropoff-container">
+            <div class="column request-container">
+                <p class="text-label">Reference ID IdP Adapter Request</p>
+                <p class="text-value">POST @ViewData["dropoffEndpoint"]</p>
+                <p>
+                    <a id="show_raw_request_link"
+                       onclick="javascript:toggleShowRaw('raw_request_textarea', 'show_raw_request_link');">
+                        Show raw
+                    </a>
+                </p>
+                <p>
+							<textarea id="raw_request_textarea"
+                                      class="code-view"
+                                      rows="15"
+                                      cols="60"
+                                      style="display:none"
+                                      readonly>@ViewData["rawRequest"]</textarea>
+                </p>
+                <p class="text-label">User-Session Attributes</p>
+                <p>
+							<textarea id="request_attributes"
+                                      class="code-view"
+                                      rows="10"
+                                      cols="60"
+                                      readonly>@ViewData["userAttributes"]</textarea>
+                </p>
+            </div>
+            <div class="column response-container">
+                <p class="text-label">Reference ID IdP Adapter Response</p>
+                <p class="text-value">
+                    @ViewData["httpStatus"]
+                </p>
+                <p>
+                    <a id="show_raw_response_link"
+                       onclick="javascript:toggleShowRaw('raw_response_textarea', 'show_raw_response_link');">
+                        Show raw
+                    </a>
+                </p>
+                <p>
+							<textarea id="raw_response_textarea"
+                                      class="code-view"
+                                      rows="15"
+                                      cols="60"
+                                      style="display:none"
+                                      readonly>@ViewData["rawResponse"]</textarea>
+                </p>
+                <p class="text-label">Reference ID </p>
+                <p class="text-value">@ViewData["REF"]</p>
+            </div>
+        </div>
+        <div class="bottom-button-container">
+            <form method="POST" action="@ViewData["resumeUrl"]">
+                <input type="hidden" id="resumePath" name="resumePath" value="@ViewData["resumePath"]">
+                <input type="hidden" id="REF" name="REF" value="@ViewData["REF"]">
+                <input class="table-button" id="ok_button" name="submit" type="submit" value="OK"/>
+            </form>
+        </div>
+        }
+        else
+        {
+        <div class="solo-text-container">
+            <p class="solo-text">State from the previous request has been invalidated. Please restart the flow.</p>
+        </div>
+        }
+        <div class="ping-link-fragment">@ViewData["resumePath"]</div>
+        <div class="start-over-link-container">
+            <a href="@ViewData["ssoUrl"]">Start Over</a>
+        </div>
+    </div>
+    <div class="ping-footer-container">
+        <div class="ping-footer">
+            <div class="ping-credits"></div>
+            <div class="ping-copyright">
+                Copyright © 2003-2020. Ping Identity Corporation. All rights reserved.
+            </div>
+        </div>
+    </div>
+</div>
