@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using AgentlessIdpSample.Utils;
 using Newtonsoft.Json.Linq;
-
+using Microsoft.Extensions.Primitives;
 
 namespace AgentlessIdpSample.Controllers
 {
@@ -21,21 +21,23 @@ namespace AgentlessIdpSample.Controllers
             {
                 if (!string.IsNullOrEmpty(Request.Form[IdpConstants.RESUME_PATH]))
                 {
-                    JObject userAttributes = Authenticator.authenticate(_configuration.GetValue<string>(WebHostDefaults.ContentRootKey),
-                                                                        Request.Form[IdpConstants.USERNAME],
-                                                                        Request.Form[IdpConstants.PASSWORD]);
-                    if (userAttributes != null)
+                    if (!StringValues.IsNullOrEmpty(Request.Form[IdpConstants.USERNAME]) 
+                    && !StringValues.IsNullOrEmpty( Request.Form[IdpConstants.PASSWORD]))
                     {
-                        return new DropoffController(_configuration).Index(Request, userAttributes);
+                        JObject userAttributes = Authenticator.authenticate(_configuration.GetValue<string>(WebHostDefaults.ContentRootKey),
+                                                                            Request.Form[IdpConstants.USERNAME],
+                                                                            Request.Form[IdpConstants.PASSWORD]);
+                        if (userAttributes != null)
+                        {
+                            return new DropoffController(_configuration).Index(Request, userAttributes);
+                        }
                     }
-                    else
-                    {
-                        ViewData["resumePath"] = Request.Form[IdpConstants.RESUME_PATH];
-                        ViewData["showData"] = false;
-                        ViewData["loginError"] = "Invalid Login.";
 
-                        return View("~/Views/App/Index.cshtml");
-                    }
+                    ViewData["resumePath"] = Request.Form[IdpConstants.RESUME_PATH];
+                    ViewData["showData"] = false;
+                    ViewData["loginError"] = "Invalid Login.";
+
+                    return View("~/Views/App/Index.cshtml");
                 }
                 else
                 {

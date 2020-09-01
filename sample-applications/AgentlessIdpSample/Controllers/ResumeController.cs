@@ -40,9 +40,7 @@ namespace AgentlessIdpSample.Controllers
 
         private static Boolean checkRelativeUrl(String relativeUrl)
         {
-            Regex resumePattern = new Regex(@"^(/idp/){1}[a-zA-Z0-9/]*(idp/){1}((SSO.ping)?(startSSO.ping)?){1}$");
-            return resumePattern.IsMatch(relativeUrl) 
-                    && Uri.IsWellFormedUriString(relativeUrl, UriKind.Relative);
+            return Uri.IsWellFormedUriString(relativeUrl, UriKind.Relative);
         }
     }
 }
